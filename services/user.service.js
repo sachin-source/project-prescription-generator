@@ -30,6 +30,7 @@ function login(username, password) {
     //         return user;
     //     });
     return new Promise((resolve, reject) => {
+        userSubject.next(JSON.stringify({username, password}));
         return resolve(localStorage.setItem('user', JSON.stringify({username, password})))
     })
 }

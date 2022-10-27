@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router';
 import { userService } from '../services';
 
-// import "../styles/Home.module.css";
-// import "../styles/globals.css";
-
 import { useState, useEffect } from 'react';
 function MyApp({ Component, pageProps }) {
 
@@ -23,11 +20,6 @@ function MyApp({ Component, pageProps }) {
         query: { returnUrl: router.asPath }
       });
     } else {
-      // if (publicPaths.includes(path)) {
-      //   router.push({
-      //     pathname : '/'
-      //   })
-      // }
       setAuthorized(true);
     }
   }

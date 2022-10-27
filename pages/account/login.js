@@ -30,7 +30,7 @@ function Login() {
                 router.push(returnUrl);
             })
             .catch((e) => {
-                console.log("alertService.error")
+                console.log("alertService.error", e)
             });
     }
 
