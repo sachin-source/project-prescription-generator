@@ -38,7 +38,7 @@ function Login() {
             <div className="card">
                 <h4 className="card-header">Login</h4>
                 <div className="card-body">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)} className="form-container">
                         <div className="form-group">
                             <label>Username</label>
                             <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />

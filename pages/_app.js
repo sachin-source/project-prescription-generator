@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { userService } from '../services';
 
 import { useState, useEffect } from 'react';
+
+import "../styles/globals.css"
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
@@ -19,6 +21,9 @@ function MyApp({ Component, pageProps }) {
         pathname: '/account/login',
         query: { returnUrl: router.asPath }
       });
+    } else if( userService.userValue && publicPaths.includes(path) ){
+      router.push(router?.query?.returnUrl || '/')
+      setAuthorized(true);
     } else {
       setAuthorized(true);
     }
@@ -29,10 +34,11 @@ function MyApp({ Component, pageProps }) {
 
         // on route change start - hide page content by setting authorized to false  
         const hideContent = () => setAuthorized(false);
-        router.events.on('routeChangeStart', hideContent);
+        // router.events.on('routeChangeStart', hideContent);
+        router.events.on('routeChangeStart', authCheck);
 
         // on route change complete - run auth check 
-        router.events.on('routeChangeComplete', authCheck)
+        // router.events.on('routeChangeComplete', authCheck)
 
         // unsubscribe from events in useEffect return function
         return () => {
