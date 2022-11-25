@@ -4,6 +4,8 @@ import { userService } from '../services';
 import { useState, useEffect } from 'react';
 
 import "../styles/globals.css"
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
@@ -49,8 +51,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+    <Navbar />
       <Component {...pageProps} />
-      <p>comman tag</p>
+    <Footer />
     </>
   )
 }
