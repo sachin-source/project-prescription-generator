@@ -1,3 +1,56 @@
 .patient-details-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.patient-details-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.patient-detail-container {
+    /* color: red; */
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.patient-detail-container input {
+    padding: 5px;
+    margin: 4px;
+    border-radius: 10px;
+    font-size: 26px;
+    /* border: 1px solid black; */
+    border: none;
+    background-color: #f2f4f7;
+}
+
+.patient-appointment-date-container, .patient-appointment-details-container {
+    width: 20vw;
+}
+
+.patient-appointment-date-and-submit-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.patient-appointment-details-container textarea {
+    width: 130%;
+    font-size: 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f2f4f7;
+}
+
+
+.patient-details-submit button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 20px;
+    border: none;
 }
