@@ -28,7 +28,7 @@
     background-color: #f2f4f7;
 }
 
-.patient-appointment-date-container, .patient-appointment-details-container {
+.patientAppointmentDate-container, .patientAppointmentDetails-container {
     width: 20vw;
 }
 
@@ -38,7 +38,7 @@
 }
 
 
-.patient-appointment-details-container textarea {
+.patientAppointmentDetails-container textarea {
     width: 130%;
     font-size: 20px;
     border-radius: 4px;

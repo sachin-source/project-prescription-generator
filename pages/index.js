@@ -1,8 +1,25 @@
 import Head from 'next/head'
+import { useState } from 'react'
 
 import styles from "../styles/Index.module.css"
 
 export default function Home() {
+
+  const [patientDetails, setpatientDetails] = useState({})
+  const onInputChange = (event) => {
+    console.log(event.currentTarget.name, event.currentTarget.value)
+
+    const updatedValue = { [event.currentTarget.name] : event.currentTarget.value }
+    setpatientDetails(patientInfo => ({
+      ...patientInfo,
+      ...updatedValue
+    }))
+  }
+
+  const submit = () => {
+    console.log(patientDetails)
+  }
+
   return (
     <div>
       <Head>
@@ -27,34 +44,34 @@ Patient details
           <h2>Patient details</h2>
         </div>
         <div className="patient-details">
-          <div className={[styles["patient-name-container"], styles["patient-detail-container"]].join(" ")}>
-            <label htmlFor="patient-name" className="patient-name-label">patient name</label>
-            <input type="text" name="patient-name" id="patient-name" className="patient-name" />
+          <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
+            <label htmlFor="patientName" className="patientName-label">patient name</label>
+            <input type="text" onBlur={onInputChange} name="patientName" id="patientName" className="patientName" />
           </div>
-          <div className={[styles["patient-age-container"], styles["patient-detail-container"]].join(" ")}>
-            <label htmlFor="patient-age" className="patient-age-label">patient age</label>
-            <input type="number" name="patient-age" id="patient-age" className="patient-age" />
+          <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
+            <label htmlFor="patientAge" className="patientAge-label">patient age</label>
+            <input type="number" onBlur={onInputChange} name="patientAge" id="patientAge" className="patientAge" />
           </div>
-          <div className={[styles["patient-disease-container"], styles["patient-detail-container"]].join(" ")}>
-            <label htmlFor="patient-disease" className="patient-disease-label">disease</label>
-            <input type="text" name="patient-disease" id="patient-disease" className="patient-disease" />
+          <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
+            <label htmlFor="patientDisease" className="patientDisease-label">disease</label>
+            <input type="text" onBlur={onInputChange} name="patientDisease" id="patientDisease" className="patientDisease" />
           </div>
           <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
-            <label htmlFor="patient-contact-number" className="patient-contact-number-label">contact number</label>
-            <input type="number" name="patient-contact-number" id="patient-contact-number" className="patient-contact-number" />
+            <label htmlFor="patientContactNumber" className="patientContactNumber-label">contact number</label>
+            <input type="number" onBlur={onInputChange} name="patientContactNumber" id="patientContactNumber" className="patientContactNumber" />
           </div>
           <div className={[styles["patient-appointment-date-and-submit-container"]]}>
-            <div className={[styles["patient-appointment-details-container"]].join(" ")}>
-              <label htmlFor="patient-appointment-details" className="patient-appointment-details-label">appointment details</label>
-              <textarea rows={3}  type="text" name="patient-appointment-details" id="patient-appointment-details" className="patient-appointment-details" />
+            <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
+              <label htmlFor="patientAppointmentDetails" className="patientAppointmentDetails-label">appointment details</label>
+              <textarea rows={5} onBlur={onInputChange}  type="text" name="patientAppointmentDetails" id="patientAppointmentDetails" className="patientAppointmentDetails" />
             </div>
-            <div className={[styles["patient-appointment-date-container"], styles["patient-detail-container"]].join(" ")}>
-              <label htmlFor="patient-appointment-date" className="patient-appointment-date-label">appointment date</label>
-              <input type="date" name="patient-appointment-date" id="patient-appointment-date" className="patient-appointment-date" />
+            <div className={[styles["patientAppointmentDate-container"], styles["patient-detail-container"]].join(" ")}>
+              <label htmlFor="patientAppointmentDate" className="patientAppointmentDate-label">appointment date</label>
+              <input type="date" onBlur={onInputChange} name="patientAppointmentDate" id="patientAppointmentDate" className="patientAppointmentDate" />
             </div>
           </div>
           <div className= {styles["patient-details-submit"]} >
-            <button>submit</button>
+            <button onClick={submit}>submit</button>
           </div>
         </div>
         </div>
