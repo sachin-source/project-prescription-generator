@@ -7,8 +7,8 @@ function Navbar() {
   return (
     <div className={styles["navbar-container"]}>
         <div className={styles["logo-container"]}>
-            <h2 >{APP_TITLE.split("").map((element) => (
-                <span>{element}</span>
+            <h2 >{APP_TITLE.split("").map((element, i) => (
+                <span key={i}>{element}</span>
             ))}</h2>
             <span className="navbar-logo-description">Tech-scription</span>
         </div>
