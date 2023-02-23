@@ -24,3 +24,11 @@
     gap: 10px;
     font-size: 20px;
 }
+
+.navbar-element {
+    padding: 10px;
+    color: #000;
+    background-color: #f2f4f7;
+    border-radius: 10px;
+    box-shadow: 4px;
+}

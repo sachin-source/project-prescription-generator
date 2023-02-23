@@ -13,10 +13,10 @@ function Navbar() {
             <span className="navbar-logo-description">Tech-scription</span>
         </div>
         <div className={styles["navbar-elements-container"]}>
-            <div className="navbar-element">new</div>
-            <div className="navbar-element">patients</div>
-            <div className="navbar-element">prescriptions</div>
-            <div className="navbar-element">archieves</div>
+            <div className={styles["navbar-element"]}>new</div>
+            <div className={styles["navbar-element"]}>patients</div>
+            <div className={styles["navbar-element"]}>prescriptions</div>
+            <div className={styles["navbar-element"]}>archieves</div>
         </div>
     </div>
   )
