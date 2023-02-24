@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
-import styles from "../styles/Index.module.css"
+import styles from "../styles/Register.module.css"
 
 export default function Home() {
 

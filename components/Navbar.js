@@ -10,7 +10,7 @@ function Navbar() {
             <h2 >{APP_TITLE.split("").map((element, i) => (
                 <span key={i}>{element}</span>
             ))}</h2>
-            <span className="navbar-logo-description">Tech-scription</span>
+            {/* <span className="navbar-logo-description">Tech-scription</span> */}
         </div>
         <div className={styles["navbar-elements-container"]}>
             <div className={styles["navbar-element"]}>new</div>

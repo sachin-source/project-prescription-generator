@@ -1,3 +1,19 @@
+:root {
+  --green: #27ae60;
+  --black: #444;
+  --light-color: #777;
+  --bg-color: #e6e6e6;
+  --border: .1rem solid rgba(0,0,0,.1);
+  --box-shadow: .4rem .4rem 1rem #ccc, -.4rem -.4rem 1rem #fff;
+  --box-shadow-inset: .4rem .4rem 1rem #ccc inset, -.4rem -.4rem 1rem #fff inset;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -64,4 +80,8 @@ a {
   padding: 10px;
   border-radius: 10px;
   border: none;
+}
+
+.primary {
+  color: var(--green);
 }
