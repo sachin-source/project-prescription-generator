@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 import styles from "../styles/Navbar.module.css"
 
@@ -19,10 +20,18 @@ function Navbar({ authorized }) {
         </div>
         {
           isLoggedIn ? (<div className={styles["navbar-elements-container"]}>
-          <div className={styles["navbar-element"]}>new</div>
-          <div className={styles["navbar-element"]}>patients</div>
-          <div className={styles["navbar-element"]}>prescriptions</div>
-          <div className={styles["navbar-element"]}>archieves</div>
+          <div className={styles["navbar-element"]}>
+            <Link href="/register" >new</Link>
+          </div>
+          <div className={styles["navbar-element"]}>
+            <Link href="/register" >patients</Link>
+          </div>
+          <div className={styles["navbar-element"]}>
+            <Link href="/register" >prescriptions</Link>
+          </div>
+          <div className={styles["navbar-element"]}>
+            <Link href="/register" >archieves</Link>
+          </div>
       </div>) : (<></>)
         }
         

@@ -19,13 +19,17 @@
 }
 
 .patient-detail-container input {
-    padding: 5px 10px;
+    padding: 10px;
     margin: 4px;
     border-radius: 10px;
-    font-size: 26px;
+    font-size: 20px;
     /* border: 1px solid black; */
     border: none;
     background-color: #f2f4f7;
+}
+
+.patient-detail-container input:focus {
+    outline: none;
 }
 
 .patientAppointmentDate-container, .patientAppointmentDetails-container {
@@ -38,12 +42,18 @@
 }
 
 
+.patientAppointmentDetails-container textarea:focus {
+    outline: none;
+}
+
 .patientAppointmentDetails-container textarea {
     width: 130%;
     font-size: 20px;
     border-radius: 4px;
     border: none;
     background-color: #f2f4f7;
+    padding: 10px;
+    margin: 4px;
 }
 
 
@@ -53,4 +63,13 @@
     border-radius: 4px;
     font-size: 20px;
     border: none;
+}
+
+.patient-details-section label {
+    font-size: 2rem;
+    color: var(--black);
+}
+
+.patient-details-section h2 {
+    margin: 10px 0;
 }

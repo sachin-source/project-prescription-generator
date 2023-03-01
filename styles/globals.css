@@ -85,3 +85,9 @@ a {
 .primary {
   color: var(--green);
 }
+
+h2 {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+  color: var(--black);
+}
