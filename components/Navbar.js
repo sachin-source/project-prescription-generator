@@ -13,9 +13,10 @@ function Navbar({ authorized }) {
   return (
     <div className={styles["navbar-container"]}>
         <div className={styles["logo-container"]}>
+            <Link href="/">
             <h2 >{APP_TITLE.split("").map((element, i) => (
                 <span key={i}>{element}</span>
-            ))}</h2>
+            ))}</h2></Link>
             {/* <span className="navbar-logo-description">Tech-scription</span> */}
         </div>
         {

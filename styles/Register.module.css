@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 10vh;
 }
 
 .patient-details-section {
@@ -56,6 +57,11 @@
     margin: 4px;
 }
 
+
+.patient-details-submit {
+    display: flex;
+    justify-content: space-between;
+}
 
 .patient-details-submit button {
     margin-top: 10px;

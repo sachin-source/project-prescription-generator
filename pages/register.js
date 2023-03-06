@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useState } from 'react'
-
 import styles from "../styles/Register.module.css"
 
 export default function Home() {
 
-  const [patientDetails, setpatientDetails] = useState({})
+  const [patientDetails, setpatientDetails] = useState({});
+  const [isPriscriptionPage, setisPriscriptionPage] = useState(false);
   const onInputChange = (event) => {
     console.log(event.currentTarget.name, event.currentTarget.value)
 
@@ -18,6 +18,10 @@ export default function Home() {
 
   const submit = () => {
     console.log(patientDetails)
+  }
+
+  const gotoPrescriptionPage = () => {
+    setisPriscriptionPage(true);
   }
 
   return (
@@ -75,6 +79,7 @@ Patient details
             </div>
             <div className={styles["patient-details-submit"]} >
               <button onClick={submit}>submit</button>
+              <button onClick={gotoPrescriptionPage}>Add prescriptions</button>
             </div>
           </div>
         </div>

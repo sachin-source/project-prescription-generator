@@ -18,6 +18,7 @@
     justify-content: space-between;
     font-size: 44px;
     margin: 0;
+    cursor: pointer;
 }
 
 .navbar-elements-container {
