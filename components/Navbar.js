@@ -25,7 +25,7 @@ function Navbar({ authorized }) {
             <Link href="/register" >new</Link>
           </div>
           <div className={styles["navbar-element"]}>
-            <Link href="/register" >patients</Link>
+            <Link href="/patients" >patients</Link>
           </div>
           <div className={styles["navbar-element"]}>
             <Link href="/register" >prescriptions</Link>
