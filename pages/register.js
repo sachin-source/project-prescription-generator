@@ -19,6 +19,8 @@ export default function Home() {
     }))
   }
 
+  const [prescriptions, setprescriptions] = useState([]);
+
   const submit = () => {
     console.log(patientDetails)
     setisPrescriptionSubmitted(true)
@@ -26,6 +28,10 @@ export default function Home() {
 
   const gotoPrescriptionPage = () => {
     setisPriscriptionPage(true);
+  }
+
+  const onPrescriptionChange = (e, i) => {
+    console.log()
   }
 
   return (
