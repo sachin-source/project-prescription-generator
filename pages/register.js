@@ -8,6 +8,25 @@ export default function Home() {
   const [isPriscriptionPage, setisPriscriptionPage] = useState(false);
   const [isPrescriptionSubmitted, setisPrescriptionSubmitted] = useState(false);
   const [prescriptionList, setprescriptionList] = useState([1]);
+  const [prescriptionDetails, setprescriptionDetails] = useState([{}]);
+
+  const deletePrescription = (i) => {
+    const temp = [...prescriptionDetails];
+    console.table(temp);
+    console.log(i)
+    temp.splice(i, 1);
+    console.table(temp);
+    setprescriptionDetails(temp);
+  }
+
+  const onPrescriptionUpdate = (e, index) => {
+    // prescriptiondetails
+    console.log(e, index)
+    const temp = [...prescriptionDetails];
+    temp[index] = temp[index] || {};
+    temp[index][e.target.name] = e.target.value;
+    setprescriptionDetails(temp)
+  }
   let prescriptionListTemp = [];
   const onInputChange = (event) => {
     console.log(event.currentTarget.name, event.currentTarget.value)
@@ -54,51 +73,58 @@ Patient details
 
       <main className={styles["patient-details-container"]} >
         {isPrescriptionSubmitted ? (<>
-        <h1>Your prescription is submitted!</h1>
+          <h1>Your prescription is submitted!</h1>
         </>) : (
-        <div className={styles["patient-details-section"]}>
-          <div className="heading-container">
-            <h2 onClick={() => {setisPriscriptionPage(false)}}>Patient details</h2>
-          </div>
-          {isPriscriptionPage ? (<div className="patient-details">
-            {/* {prescriptionListTemp} */}
-            {
-              prescriptionList.map((a, i) => (
-                <div className={[styles["prescription-container"]]} >
-            <div className={[styles["prescription-detail-container"]]} >
-              <label htmlFor="patientName" className="patientName-label">Medicine name</label>
-              <select className="prescription-name">
+          <div className={styles["patient-details-section"]}>
+            <div className="heading-container">
+              <h2 onClick={() => { setisPriscriptionPage(false) }}>Patient details</h2>
+            </div>
+            {isPriscriptionPage ? (<div className="patient-details">
+              {/* {prescriptionListTemp} */}
+              {
+                prescriptionDetails.map((a, i) => (
+                  <div className={[styles["prescription-container"]]} >
+                    <div className={[styles["prescription-detail-container"]]} >
+                      <label htmlFor="name" className="name-label">Medicine name</label>
+                      <input type="text" placeholder={'medicine'} value={a.name} onChange={(e) => onPrescriptionUpdate(e, i)} onBlur={(e) => onPrescriptionUpdate(e, i)} name="name" id="name" className="name" list='medicineList' />
+                      <datalist id="medicineList">
+                        <option value="DOLO 350"></option>
+                        <option value="B complex"></option>
+                        <option value="paracetamol"></option>
+                      </datalist>
+                      {/* <select className="prescription-name">
                 <option default selected>select</option>
                 <option >DOLO 350</option>
                 <option >B complex</option>
                 <option >paracetamol</option>
-              </select>
-            </div>
-            <div className={[styles["prescription-detail-container"]]} >
-              <label htmlFor="patientName" className="patientName-label">Dosage</label>
-              <input type="text" placeholder={'100mg'} onBlur={onInputChange} name="patientName" id="patientName" className="patientName" />
-            </div>
-            <div className={[styles["prescription-detail-container"]]} >
-              <label htmlFor="patientName" className="patientName-label">Intake routine</label>
-              <select className="prescription-name">
-                <option default selected>select</option>
-                <option ><input type='checkbox' id='1time' name='1time'/> <label htmlFor='1time'>1 time</label></option>
-                <option ><input type='checkbox' id='2times' name='2times'/> <label htmlFor='2times'>2 times</label></option>
-                <option ><input type='checkbox' id='3times' name='3times'/> <label htmlFor='3times'>3 times</label></option>
-              </select>
-            </div>
-            <div className={[styles["prescription-detail-container"]]} >
-              <label htmlFor="patientName" className="patientName-label">Intake pattern</label>
-              <select className="prescription-name">
-                <option >Before Meals</option>
-                <option default>After Meals</option>
-                <option >Anytime</option>
-              </select>
-            </div>
-            </div>
-              ))
-            }
-            {/* <div className={[styles["prescription-container"]]} >
+              </select> */}
+                    </div>
+                    <div className={[styles["prescription-detail-container"]]} >
+                      <label htmlFor="dosage" className="dosage-label">Dosage</label>
+                      <input type="text" value={a.dosage} placeholder={'100mg'} onBlur={(e) => onPrescriptionUpdate(e, i)} name="dosage" id="dosage" className="dosage" />
+                    </div>
+                    <div className={[styles["prescription-detail-container"]]} >
+                      <label htmlFor="intakeRoutine" className="intakeRoutine-label">Intake routine</label>
+                      <select className="prescription-name" value={a.intakeRoutine} name='intakeRoutine' onChange={(e) => onPrescriptionUpdate(e, i)}>
+                        <option default selected>select</option>
+                        <option ><input type='checkbox' id='1time' name='1time' /> <label htmlFor='1time'>1 time</label></option>
+                        <option ><input type='checkbox' id='2times' name='2times' /> <label htmlFor='2times'>2 times</label></option>
+                        <option ><input type='checkbox' id='3times' name='3times' /> <label htmlFor='3times'>3 times</label></option>
+                      </select>
+                    </div>
+                    <div className={[styles["prescription-detail-container"]]} >
+                      <label htmlFor="intakePattern" className="intakePattern-label">Intake pattern</label>
+                      <select className="prescription-name" name='intakePattern' value={a.intakePattern} onChange={(e) => onPrescriptionUpdate(e, i)}>
+                        <option default selected>After Meals</option>
+                        <option >Before Meals</option>
+                        <option >Anytime</option>
+                      </select>
+                    </div>
+                    <div className={[styles["prescription-delete-container"]]} onClick={()=>deletePrescription(i)} >&times;</div>
+                  </div>
+                ))
+              }
+              {/* <div className={[styles["prescription-container"]]} >
             <div className={[styles["prescription-detail-container"]]} >
               <label htmlFor="patientName" className="patientName-label">Medicine name</label>
               <select className="prescription-name">
@@ -130,44 +156,44 @@ Patient details
               </select>
             </div>
             </div> */}
-            <span className={[styles['add-new-prescription']]} onClick={() => setprescriptionList([...prescriptionList, ...[1]])} >+</span>
-            <span className={[styles['space']]} ></span>
-          </div>) : (<div className="patient-details">
-            <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
-              <label htmlFor="patientName" className="patientName-label">patient name</label>
-              <input type="text" onBlur={onInputChange} name="patientName" id="patientName" className="patientName" />
-            </div>
-            <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
-              <label htmlFor="patientAge" className="patientAge-label">patient age</label>
-              <input type="number" onBlur={onInputChange} name="patientAge" id="patientAge" className="patientAge" />
-            </div>
-            <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
-              <label htmlFor="patientDisease" className="patientDisease-label">disease</label>
-              <input type="text" onBlur={onInputChange} name="patientDisease" id="patientDisease" className="patientDisease" />
-            </div>
-            <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
-              <label htmlFor="patientContactNumber" className="patientContactNumber-label">contact number</label>
-              <input type="number" onBlur={onInputChange} name="patientContactNumber" id="patientContactNumber" className="patientContactNumber" />
-            </div>
-            <div className={[styles["patient-appointment-date-and-submit-container"]]}>
-              <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
-                <label htmlFor="patientAppointmentDetails" className="patientAppointmentDetails-label">appointment details</label>
-                <textarea rows={3} onBlur={onInputChange} type="text" name="patientAppointmentDetails" id="patientAppointmentDetails" className="patientAppointmentDetails" />
+              <span className={[styles['add-new-prescription']]} onClick={() => setprescriptionDetails([...prescriptionDetails, ...[{}]])} >&#43;</span>
+              <span className={[styles['space']]} ></span>
+            </div>) : (<div className="patient-details">
+              <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
+                <label htmlFor="patientName" className="patientName-label">patient name</label>
+                <input type="text" onBlur={onInputChange} name="patientName" id="patientName" className="patientName" />
               </div>
-              <div className={[styles["patientAppointmentDate-container"], styles["patient-detail-container"]].join(" ")}>
-                <label htmlFor="patientAppointmentDate" className="patientAppointmentDate-label">appointment date</label>
-                <input type="date" onBlur={onInputChange} name="patientAppointmentDate" id="patientAppointmentDate" className="patientAppointmentDate" />
+              <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
+                <label htmlFor="patientAge" className="patientAge-label">patient age</label>
+                <input type="number" onBlur={onInputChange} name="patientAge" id="patientAge" className="patientAge" />
               </div>
-            </div>
-            <div className="patient-prescription-container">
+              <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
+                <label htmlFor="patientDisease" className="patientDisease-label">disease</label>
+                <input type="text" onBlur={onInputChange} name="patientDisease" id="patientDisease" className="patientDisease" />
+              </div>
+              <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
+                <label htmlFor="patientContactNumber" className="patientContactNumber-label">contact number</label>
+                <input type="number" onBlur={onInputChange} name="patientContactNumber" id="patientContactNumber" className="patientContactNumber" />
+              </div>
+              <div className={[styles["patient-appointment-date-and-submit-container"]]}>
+                <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
+                  <label htmlFor="patientAppointmentDetails" className="patientAppointmentDetails-label">appointment details</label>
+                  <textarea rows={3} onBlur={onInputChange} type="text" name="patientAppointmentDetails" id="patientAppointmentDetails" className="patientAppointmentDetails" />
+                </div>
+                <div className={[styles["patientAppointmentDate-container"], styles["patient-detail-container"]].join(" ")}>
+                  <label htmlFor="patientAppointmentDate" className="patientAppointmentDate-label">appointment date</label>
+                  <input type="date" onBlur={onInputChange} name="patientAppointmentDate" id="patientAppointmentDate" className="patientAppointmentDate" />
+                </div>
+              </div>
+              <div className="patient-prescription-container">
 
-            </div>
-          </div>)}
+              </div>
+            </div>)}
             <div className={styles["patient-details-submit"]} >
               <button onClick={submit} disabled={!isPriscriptionPage}>submit</button>
               <button onClick={gotoPrescriptionPage} disabled={isPriscriptionPage}>Add prescriptions</button>
             </div>
-        </div>)}
+          </div>)}
       </main>
     </div>
   )
