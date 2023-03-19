@@ -29,9 +29,19 @@ function login(username, password) {
 
     //         return user;
     //     });
+    
     return new Promise((resolve, reject) => {
-        userSubject.next(JSON.stringify({username, password}));
+        return fetch('http://localhost:3005/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email : username, password}),
+    }).then((d) => {
+      console.log(d)
+      userSubject.next(JSON.stringify({username, password}));
         return resolve(localStorage.setItem('user', JSON.stringify({username, password})))
+    })
     })
 }
 
