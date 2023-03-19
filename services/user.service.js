@@ -37,7 +37,7 @@ function login(username, password) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email : username, password}),
-    }).then((d) => {
+    }).then((a) => a.json()).then((d) => {
       console.log(d)
       userSubject.next(JSON.stringify({username, password}));
         return resolve(localStorage.setItem('user', JSON.stringify({username, password})))

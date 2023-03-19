@@ -124,3 +124,11 @@
     align-items: center;
     cursor: pointer;
 }
+
+.prescription-detail-container input, .prescription-detail-container select {
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+    background-color: #f2f4f7;
+    font-size: 25px;
+}

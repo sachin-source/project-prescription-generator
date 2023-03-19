@@ -1,0 +1,36 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+}
+
+.card-container {
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: var(--green);
+    color: white;
+    min-width: 50%;
+}
+
+.card-container h4 {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.form-group {
+    margin: 10px;
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input {
+    font-size: 2rem;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    border: none;
+    padding: 10px;
+}

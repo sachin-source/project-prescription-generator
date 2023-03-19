@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 // import Link from 'next/link';
 // import { Link } from 'components';
 import { userService } from '../../services';
-
+import styles from "../../styles/Login.module.css"
 
 
 export default Login;
@@ -37,16 +37,17 @@ function Login() {
     }
 
     return (
-            <div className="card">
+            <div className={styles.card}>
+                <div className={styles["card-container"]} >
                 <h4 className="card-header">Login</h4>
-                <div className="card-body">
+                <div className={styles["card-body"]}>
                     <form onSubmit={handleSubmit(onSubmit)} className="form-container">
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label>Username</label>
                             <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.username?.message}</div>
                         </div>
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label>Password</label>
                             <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
@@ -61,6 +62,7 @@ function Login() {
                             </a>
                         </Link> */}
                     </form>
+                </div>
                 </div>
             </div>
     );
