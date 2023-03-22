@@ -7,8 +7,7 @@ export default function Prescriptions() {
 
 
 return (
-    <div>
-
+    <div  className='inprogress'>
       <h2>This page is in progress</h2>
     </div>
 )

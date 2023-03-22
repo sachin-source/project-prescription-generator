@@ -18,6 +18,12 @@ export default function Home() {
     setprescriptionDetails(temp);
   }
 
+  const reset = () => {
+    setpatientDetails({});
+    setisPriscriptionPage(false);
+    setisPrescriptionSubmitted(false);
+    setprescriptionDetails([{}])
+  }
   const submita = () => {}
 
   const onPrescriptionUpdate = (e, index) => {
@@ -52,7 +58,8 @@ export default function Home() {
     fetch('http://localhost:3005/prescription', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        token : localStorage.getItem('token')
       },
       body: JSON.stringify({...patientDetails, prescriptionDetails : prescriptionDetails}),
     }).then((d) => {
@@ -71,7 +78,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Login Page</title>
+        <title>Patient registration</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
@@ -87,12 +94,13 @@ Patient details
 */}
 
       <main className={styles["patient-details-container"]} >
-        {isPrescriptionSubmitted ? (<>
+        {isPrescriptionSubmitted ? (<div  className='inprogress'>
           <h1>Your prescription is submitted!</h1>
-        </>) : (
+          <span onClick={reset}>click to enter new prescription</span>
+        </div>) : (
           <div className={styles["patient-details-section"]}>
             <div className="heading-container">
-              <h2 onClick={() => { setisPriscriptionPage(false) }}>Patient details</h2>
+              <h2><span onClick={() => { setisPriscriptionPage(false) }}>Patient details</span></h2>
             </div>
             {isPriscriptionPage ? (<div className="patient-details">
               {/* {prescriptionListTemp} */}
@@ -101,7 +109,7 @@ Patient details
                   <div className={[styles["prescription-container"]]} >
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="name" className="name-label">Medicine name</label>
-                      <input type="text" placeholder={'medicine'} value={a.name} onChange={(e) => onPrescriptionUpdate(e, i)} onBlur={(e) => onPrescriptionUpdate(e, i)} name="name" id="name" className="name" list='medicineList' />
+                      <input type="text" placeholder={'medicine'} value={a.name} onChange={(e) => onPrescriptionUpdate(e, i)} onBlur={(e) => onPrescriptionUpdate(e, i)} name="name" id="name" className="name" list='medicineList' autocomplete="off" />
                       <datalist id="medicineList">
                         <option value="DOLO 350"></option>
                         <option value="B complex"></option>
@@ -116,7 +124,7 @@ Patient details
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="dosage" className="dosage-label">Dosage</label>
-                      <input type="text" value={a.dosage} placeholder={'100mg'} onBlur={(e) => onPrescriptionUpdate(e, i)} name="dosage" id="dosage" className="dosage" />
+                      <input type="text" value={a.dosage} placeholder={'100mg'} onBlur={(e) => onPrescriptionUpdate(e, i)} name="dosage" id="dosage" className="dosage" autocomplete="off" />
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="intakeRoutine" className="intakeRoutine-label">Intake routine</label>
@@ -144,19 +152,19 @@ Patient details
             </div>) : (<div className="patient-details">
               <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="name" className="patientName-label">patient name</label>
-                <input type="text" onBlur={onInputChange} name="name" id="name" className="name" />
+                <input type="text" onBlur={onInputChange} name="name" id="name" className="name" autocomplete="off" />
               </div>
               <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="age" className="age-label">patient age</label>
-                <input type="number" onBlur={onInputChange} name="age" id="age" className="age" />
+                <input type="number" onBlur={onInputChange} name="age" id="age" className="age" autocomplete="off" />
               </div>
               <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="disease" className="disease-label">disease</label>
-                <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" />
+                <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" autocomplete="off" />
               </div>
               <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="contactNumber" className="contactNumber-label">contact number</label>
-                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" />
+                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" autocomplete="off" />
               </div>
               <div className={[styles["patient-appointment-date-and-submit-container"]]}>
                 <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>

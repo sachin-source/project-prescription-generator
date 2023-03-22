@@ -12,7 +12,7 @@ function Navbar({ authorized }) {
 
   const logout = () => {
     localStorage.clear();
-    location.reload()
+    location.replace('/account/login')
   }
   
   return (
@@ -36,7 +36,7 @@ function Navbar({ authorized }) {
             <Link href="/prescriptions" >prescriptions</Link>
           </div>
           <div className={styles["navbar-element"]}>
-            <span onClick={logout} >logout</span>
+            <span style={{cursor:'pointer'}} onClick={logout} >logout</span>
           </div>
       </div>) : (<></>)
         }
