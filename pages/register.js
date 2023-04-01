@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from "../styles/Register.module.css"
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
   const [isPriscriptionPage, setisPriscriptionPage] = useState(false);
   const [isPrescriptionSubmitted, setisPrescriptionSubmitted] = useState(false);
   const [prescriptionDetails, setprescriptionDetails] = useState([{}]);
+  const [patientList, setpatientList] = useState([]);
 
   const deletePrescription = (i) => {
     const temp = [...prescriptionDetails];
@@ -17,6 +18,18 @@ export default function Home() {
     console.table(temp);
     setprescriptionDetails(temp);
   }
+  
+  useEffect(()=>{
+    fetch('http://localhost:3005/patient/names', {
+      headers: {
+        'Content-Type': 'application/json',
+        token : localStorage.getItem('token')
+      },
+    }).then((d) => d.json())
+    .then((d) => {
+      setpatientList(d?.names)
+    })
+  }, [])
 
   const reset = () => {
     setpatientDetails({});
@@ -109,7 +122,7 @@ Patient details
                   <div className={[styles["prescription-container"]]} >
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="name" className="name-label">Medicine name</label>
-                      <input type="text" placeholder={'medicine'} value={a.name} onChange={(e) => onPrescriptionUpdate(e, i)} onBlur={(e) => onPrescriptionUpdate(e, i)} name="name" id="name" className="name" list='medicineList' autocomplete="off" />
+                      <input type="text" placeholder={'medicine'} value={a.name} onChange={(e) => onPrescriptionUpdate(e, i)} onBlur={(e) => onPrescriptionUpdate(e, i)} name="name" id="name" className="name" list='medicineList' autoComplete="off" />
                       <datalist id="medicineList">
                         <option value="DOLO 350"></option>
                         <option value="B complex"></option>
@@ -124,7 +137,7 @@ Patient details
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="dosage" className="dosage-label">Dosage</label>
-                      <input type="text" value={a.dosage} placeholder={'100mg'} onBlur={(e) => onPrescriptionUpdate(e, i)} name="dosage" id="dosage" className="dosage" autocomplete="off" />
+                      <input type="text" value={a.dosage} placeholder={'100mg'} onBlur={(e) => onPrescriptionUpdate(e, i)} name="dosage" id="dosage" className="dosage" autoComplete="off" />
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="intakeRoutine" className="intakeRoutine-label">Intake routine</label>
@@ -152,19 +165,22 @@ Patient details
             </div>) : (<div className="patient-details">
               <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="name" className="patientName-label">patient name</label>
-                <input type="text" onBlur={onInputChange} name="name" id="name" className="name" autocomplete="off" />
+                <input type="text" onBlur={onInputChange} name="name" id="name" className="name" autoComplete="off" list='patientList' />
+                <datalist id="patientList">
+                        {patientList?.map((p, i) => <option key={i} value={p.name} ></option>)}
+                      </datalist>
               </div>
               <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="age" className="age-label">patient age</label>
-                <input type="number" onBlur={onInputChange} name="age" id="age" className="age" autocomplete="off" />
+                <input type="number" onBlur={onInputChange} name="age" id="age" className="age" autoComplete="off" />
               </div>
               <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="disease" className="disease-label">disease</label>
-                <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" autocomplete="off" />
+                <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" autoComplete="off" />
               </div>
               <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="contactNumber" className="contactNumber-label">contact number</label>
-                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" autocomplete="off" />
+                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" autoComplete="off" />
               </div>
               <div className={[styles["patient-appointment-date-and-submit-container"]]}>
                 <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
