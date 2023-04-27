@@ -8,7 +8,12 @@ function Navbar({ authorized }) {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     setisLoggedIn(localStorage.getItem('user'))
-  }, [])
+  }, [authorized])
+
+  const logout = () => {
+    localStorage.clear();
+    location.replace('/account/login')
+  }
   
   return (
     <div className={styles["navbar-container"]}>
@@ -28,10 +33,10 @@ function Navbar({ authorized }) {
             <Link href="/patients" >patients</Link>
           </div>
           <div className={styles["navbar-element"]}>
-            <Link href="/register" >prescriptions</Link>
+            <Link href="/prescriptions" >prescriptions</Link>
           </div>
           <div className={styles["navbar-element"]}>
-            <Link href="/register" >archieves</Link>
+            <span style={{cursor:'pointer'}} onClick={logout} >logout</span>
           </div>
       </div>) : (<></>)
         }

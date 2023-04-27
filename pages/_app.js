@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-    <Navbar />
+    <Navbar authorized={authorized} />
       <Component {...pageProps} />
     <Footer />
     </>
