@@ -1,7 +1,16 @@
 import { useState } from 'react'
-import styles from "../styles/patient.module.css"
+import styles from "../styles/patient.module.css";
+import { httpService } from '../services';
 
 export default function Patients() {
+  useEffect(() => {
+    httpService.getPatientList().then((data) => {
+      console.log(data)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
+  
     return (
         // <table></table>
         <table className={styles['customers']}>
