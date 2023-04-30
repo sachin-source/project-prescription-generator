@@ -1,23 +1,55 @@
-.customers {
+.custom-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     font-size: 2rem;
+    margin: 4px;
   }
   
-  .customers td, .customers th {
+  .custom-table td, .custom-table th {
     border: 1px solid #ddd;
     padding: 8px;
   }
   
-  .customers tr:nth-child(even){background-color: #f2f2f2;}
+  .custom-table tr:nth-child(even){background-color: #f2f2f2;}
   
-  .customers tr:hover {background-color: #ddd;}
+  .custom-table tr:hover {background-color: #ddd;}
   
-  .customers th {
+  .custom-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background-color: #04AA6D;
     color: white;
+  }
+
+  .custom-table tr.active {
+    background-color: #ddd;
+  }
+
+  .visit-page-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .visit-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20%;
+    font-size: 2rem;
+  }
+
+  .prescription-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-right: 15px;
+  }
+
+  .visit-list-container tbody tr {
+    cursor: pointer;
   }

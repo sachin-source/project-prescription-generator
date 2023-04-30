@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import { set } from 'react-hook-form';
 import styles from "../styles/patient.module.css"
 
 const dummyData = [
@@ -19,16 +18,76 @@ const dummyData = [
 export default function Patients() {
   const [isVisitsPage, setIsVisitsPage] = useState(false);
   const [patientsData, setpatientsData] = useState([{}]);
+  const [activePatient, setActivePatient] = useState(undefined);
+  const [visitsAndPrescriptions, setVisitsAndPrescriptions] = useState({});
+  const [activeVisit, setActiveVisit] = useState(undefined);
   useEffect(()=>{
     fetch('http://localhost:3005/patient').then((a) => a.json()).then((data) => {
       data.status && setpatientsData(data.patients)
     })
-  }, [])
+  }, []);
+
+  const setActivePatientDetails = (patientId="") => {
+    setActivePatient(patientsData.find((patientData) => patientData._id == patientId));
+    patientId && fetch('http://localhost:3005/visit?patientId=' + patientId).then((a) => a.json()).then((data) => {
+      setVisitsAndPrescriptions(data)
+      setIsVisitsPage(true)
+      setActiveVisit(data.visits[0])
+    })
+  }
   return (
     // <table></table>
     <div className='patients-page-container' >
       
-    { isVisitsPage ? (<></>): (<table className={styles['customers']}>
+    { isVisitsPage ? (<>
+      <div className={styles['visit-page-container']}>
+        <div className={styles['visit-list-container']}>
+          <table className={styles['custom-table']}>
+            <thead>
+              <tr>
+                <th>Visit</th>
+              </tr>
+            </thead>
+            <tbody>
+          {
+            visitsAndPrescriptions.visits.map((visit, i) => (
+              <tr className={visit._id == activeVisit._id ? styles.active : ''} onClick={() => setActiveVisit(visit)}>
+                <td>
+                  { visit._id != activeVisit._id ? ( <span> {visit.appointmentDate} </span> ) : ( <strong> {visit.appointmentDate} </strong> )}
+                </td>
+              </tr>
+              ))
+            }
+            </tbody>
+            </table>
+        </div>
+        <div className={styles['prescription-details-container']} >
+          <table className={styles['custom-table']}>
+            <thead>
+              <tr>
+                <th>Sl</th>
+                <th>Prescription Name</th>
+                <th>Dosage</th>
+                <th>Intake Routine</th>
+                <th>Intake Pattern</th>
+              </tr>
+              </thead>
+              <tbody>
+          {
+            visitsAndPrescriptions?.prescriptions.filter((prescription) => prescription.visitId == activeVisit._id).map((prescription, i) => (
+                    <tr key={i}>
+                    <td>{prescription?.name}</td>
+                    <td>{prescription?.dosage}</td>
+                    <td>{prescription?.intakeRoutine}</td>
+                    <td>{prescription?.intakePattern}</td>
+                  </tr>
+                  ))
+                }
+                </tbody>  
+          </table>
+        </div>
+      </div>
+    </>): (<table className={styles['custom-table']}>
       <thead>
       <tr>
         <th>Name</th>
@@ -45,7 +104,7 @@ export default function Patients() {
         <td>{d?.age}</td>
         <td>{d?.disease}</td>
         <td>{d?.contactNumber}</td>
-        <td>&#8595;</td>
+        <td onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
       </tr>
       ))}
       </tbody>
