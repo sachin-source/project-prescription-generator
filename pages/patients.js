@@ -113,7 +113,7 @@ export default function Patients() {
         <td>{d?.age}</td>
         <td>{d?.disease}</td>
         <td>{d?.contactNumber}</td>
-        <td onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
+        <td className='clickable' onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
       </tr>
       ))}
       </tbody>
