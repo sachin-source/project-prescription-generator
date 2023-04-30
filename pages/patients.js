@@ -1,4 +1,4 @@
-
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from "../styles/patient.module.css"
 
@@ -27,6 +27,13 @@ export default function Patients() {
     })
   }, []);
 
+  const backToPatientList = () => {
+    setActiveVisit(undefined)
+    setActivePatient(undefined)
+    setVisitsAndPrescriptions({})
+    setIsVisitsPage(false)
+  }
+
   const setActivePatientDetails = (patientId="") => {
     setActivePatient(patientsData.find((patientData) => patientData._id == patientId));
     patientId && fetch('http://localhost:3005/visit?patientId=' + patientId).then((a) => a.json()).then((data) => {
@@ -38,7 +45,8 @@ export default function Patients() {
   return (
     // <table></table>
     <div className='patients-page-container' >
-      
+      <div className='breadcrumbs' > <Link href={'/'}> home </Link> {isVisitsPage ? (<span onClick={backToPatientList}> / patients </span>) : (<></>)} </div>
+      <h3> { isVisitsPage ? ( activePatient.name + "'s Visit List") : 'Patient List' } </h3>
     { isVisitsPage ? (<>
       <div className={styles['visit-page-container']}>
         <div className={styles['visit-list-container']}>
@@ -76,6 +84,7 @@ export default function Patients() {
           {
             visitsAndPrescriptions?.prescriptions.filter((prescription) => prescription.visitId == activeVisit._id).map((prescription, i) => (
                     <tr key={i}>
+                    <td>{i+1}</td>
                     <td>{prescription?.name}</td>
                     <td>{prescription?.dosage}</td>
                     <td>{prescription?.intakeRoutine}</td>

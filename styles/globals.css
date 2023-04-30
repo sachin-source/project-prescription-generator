@@ -92,6 +92,12 @@ h2 {
   color: var(--black);
 }
 
+h3 {
+  font-size: 2rem;
+  padding: 5px 10px;
+  margin: 10px 5px;
+}
+
 .inprogress {
   display: flex;
   justify-content: center;
@@ -104,5 +110,15 @@ h2 {
   font-size: 1.5rem;
   color: blue;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.breadcrumbs {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  padding: 5px 5px;
+}
+
+.breadcrumbs * {
   cursor: pointer;
 }
