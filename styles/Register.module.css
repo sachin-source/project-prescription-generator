@@ -133,6 +133,19 @@
     font-size: 25px;
 }
 
+.intakeRoutineContainer {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+}
+
+.intakeRoutineContainer span {
+    padding: 5px 10px ;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     .patient-detail-container {
         width: 100vw;

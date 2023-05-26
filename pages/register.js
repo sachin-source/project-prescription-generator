@@ -88,6 +88,10 @@ export default function Home() {
     console.log()
   }
 
+  const intakeRoutineChange = (e, i) => {
+    console.log(e, i)
+  }
+
   return (
     <div>
       <Head>
@@ -141,12 +145,17 @@ Patient details
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="intakeRoutine" className="intakeRoutine-label">Intake routine</label>
-                      <select className="prescription-name" value={a.intakeRoutine} name='intakeRoutine' onChange={(e) => onPrescriptionUpdate(e, i)}>
+                      {/* <select className="prescription-name" value={a.intakeRoutine} name='intakeRoutine' onChange={(e) => onPrescriptionUpdate(e, i)}>
                         <option default selected>select</option>
                         <option ><input type='checkbox' id='1time' name='1time' /> <label htmlFor='1time'>1 time</label></option>
                         <option ><input type='checkbox' id='2times' name='2times' /> <label htmlFor='2times'>2 times</label></option>
                         <option ><input type='checkbox' id='3times' name='3times' /> <label htmlFor='3times'>3 times</label></option>
-                      </select>
+                      </select> */}
+                      <div className={[styles["intakeRoutineContainer"]]}>
+                        <span value={'m'} onClick={(e) => intakeRoutineChange(e, i)}>M</span>
+                        <span>A</span>
+                        <span>N</span>
+                      </div>
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="intakePattern" className="intakePattern-label">Intake pattern</label>
