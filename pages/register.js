@@ -9,6 +9,7 @@ export default function Home() {
   const [isPrescriptionSubmitted, setisPrescriptionSubmitted] = useState(false);
   const [prescriptionDetails, setprescriptionDetails] = useState([{}]);
   const [patientList, setpatientList] = useState([]);
+  const [intakeRoutine, setIntakeRoutine] = useState(undefined)
 
   const deletePrescription = (i) => {
     const temp = [...prescriptionDetails];
@@ -90,6 +91,7 @@ export default function Home() {
 
   const intakeRoutineChange = (e, i) => {
     console.log(e, i)
+
   }
 
   return (
