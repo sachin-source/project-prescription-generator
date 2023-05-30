@@ -90,7 +90,7 @@ export default function Home() {
   }
 
   const intakeRoutineChange = (e, i) => {
-    console.log(e, i)
+    console.log(e, i, e.target.innerText)
 
   }
 
