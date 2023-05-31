@@ -102,9 +102,9 @@ export default function Home() {
     temp[i].intakeRoutineGen = temp[i].intakeRoutineGen || "000"
     const RoutineGen = "MAN";
     const routineIndex = RoutineGen.indexOf(e.target.innerText)
-    temp[i].intakeRoutineGen.replaceAt(routineIndex, Boolean(+temp[i].intakeRoutineGen[routineIndex]))
-    console.log(temp)
-
+    temp[i].intakeRoutineGen.replaceAt(routineIndex, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0' )
+    console.log(temp, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0')
+    setprescriptionDetails(temp)
 
   }
 
