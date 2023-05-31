@@ -89,8 +89,22 @@ export default function Home() {
     console.log()
   }
 
+  String.prototype.replaceAt=function(index, char) {
+    var a = this.split("");
+    a[index] = char;
+    return a.join("");
+}
+
   const intakeRoutineChange = (e, i) => {
-    console.log(e, i, e.target.innerText)
+    // console.log(e, i, e.target.innerText)
+    const temp = [...prescriptionDetails];
+    temp[i] = temp[i] || {};
+    temp[i].intakeRoutineGen = temp[i].intakeRoutineGen || "000"
+    const RoutineGen = "MAN";
+    const routineIndex = RoutineGen.indexOf(e.target.innerText)
+    temp[i].intakeRoutineGen.replaceAt(routineIndex, Boolean(+temp[i].intakeRoutineGen[routineIndex]))
+    console.log(temp)
+
 
   }
 
