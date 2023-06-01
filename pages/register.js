@@ -13,10 +13,7 @@ export default function Home() {
 
   const deletePrescription = (i) => {
     const temp = [...prescriptionDetails];
-    console.table(temp);
-    console.log(i)
     temp.splice(i, 1);
-    console.table(temp);
     setprescriptionDetails(temp);
   }
   
@@ -42,7 +39,6 @@ export default function Home() {
 
   const onPrescriptionUpdate = (e, index) => {
     // prescriptiondetails
-    console.log(e, index)
     const temp = [...prescriptionDetails];
     temp[index] = temp[index] || {};
     temp[index][e.target.name] = e.target.value;
@@ -50,7 +46,6 @@ export default function Home() {
   }
   let prescriptionListTemp = [];
   const onInputChange = (event) => {
-    console.log(event.currentTarget.name, event.currentTarget.value)
 
     const updatedValue = { [event.currentTarget.name]: event.currentTarget.value }
     setpatientDetails(patientInfo => ({
@@ -62,12 +57,7 @@ export default function Home() {
   const [prescriptions, setprescriptions] = useState([]);
 
   const submit = () => {
-    console.table(patientDetails);
-    console.table(prescriptionDetails)
     setisPrescriptionSubmitted(true)
-
-
-
 
     fetch('http://localhost:3005/prescription', {
       method: 'POST',
@@ -99,7 +89,6 @@ const getIntakeRoutinegen = (i) => {
   const currentRoutinegen = prescriptionDetails[i]?.intakeRoutineGen || "000"
   const currentRoutinegenValues = currentRoutinegen.trim().split('')
   const routineGen = ['M', 'A', 'N'];
-  console.log({currentRoutinegenValues})
   return currentRoutinegenValues.map((v, n) => {
     return { active : Boolean(+v), value : routineGen[n] }
   })
