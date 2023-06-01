@@ -146,6 +146,14 @@
     cursor: pointer;
 }
 
+.inactive-intakeRoutine {
+    background-color: var(--bg-color);
+}
+
+.active-intakeRoutine {
+    background-color: var(--green);
+}
+
 @media only screen and (max-width: 600px) {
     .patient-detail-container {
         width: 100vw;

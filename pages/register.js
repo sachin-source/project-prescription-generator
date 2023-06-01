@@ -95,6 +95,16 @@ export default function Home() {
     return a.join("");
 }
 
+const getIntakeRoutinegen = (i) => {
+  const currentRoutinegen = prescriptionDetails[i]?.intakeRoutineGen || "000"
+  const currentRoutinegenValues = currentRoutinegen.trim().split('')
+  const routineGen = ['M', 'A', 'N'];
+  console.log({currentRoutinegenValues})
+  return currentRoutinegenValues.map((v, n) => {
+    return { active : Boolean(+v), value : routineGen[n] }
+  })
+}
+
   const intakeRoutineChange = (e, i) => {
     // console.log(e, i, e.target.innerText)
     const temp = [...prescriptionDetails];
@@ -102,8 +112,8 @@ export default function Home() {
     temp[i].intakeRoutineGen = temp[i].intakeRoutineGen || "000"
     const RoutineGen = "MAN";
     const routineIndex = RoutineGen.indexOf(e.target.innerText)
-    temp[i].intakeRoutineGen.replaceAt(routineIndex, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0' )
-    console.log(temp, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0')
+    temp[i].intakeRoutineGen = temp[i].intakeRoutineGen.replaceAt(routineIndex, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0' )
+    // console.log(temp, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0')
     setprescriptionDetails(temp)
 
   }
@@ -168,9 +178,13 @@ Patient details
                         <option ><input type='checkbox' id='3times' name='3times' /> <label htmlFor='3times'>3 times</label></option>
                       </select> */}
                       <div className={[styles["intakeRoutineContainer"]]}>
-                        <span value={'m'} onClick={(e) => intakeRoutineChange(e, i)}>M</span>
-                        <span>A</span>
-                        <span>N</span>
+                        {/* <span onClick={(e) => intakeRoutineChange(e, i)} className='sdf' >M</span>
+                        <span onClick={(e) => intakeRoutineChange(e, i)}>N</span> */}
+                        {
+                          getIntakeRoutinegen(i).map((data, j) => (
+                            <span className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"] } onClick={(e) => intakeRoutineChange(e, i)}>{data.value}</span>
+                          ))
+                        }
                       </div>
                     </div>
                     <div className={[styles["prescription-detail-container"]]} >
