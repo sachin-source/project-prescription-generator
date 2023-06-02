@@ -86,7 +86,7 @@ export default function Home() {
 }
 
 const getIntakeRoutinegen = (i) => {
-  const currentRoutinegen = prescriptionDetails[i]?.intakeRoutineGen || "000"
+  const currentRoutinegen = prescriptionDetails[i]?.intakeRoutine || "000"
   const currentRoutinegenValues = currentRoutinegen.trim().split('')
   const routineGen = ['M', 'A', 'N'];
   return currentRoutinegenValues.map((v, n) => {
@@ -98,11 +98,11 @@ const getIntakeRoutinegen = (i) => {
     // console.log(e, i, e.target.innerText)
     const temp = [...prescriptionDetails];
     temp[i] = temp[i] || {};
-    temp[i].intakeRoutineGen = temp[i].intakeRoutineGen || "000"
+    temp[i].intakeRoutine = temp[i].intakeRoutine || "000"
     const RoutineGen = "MAN";
     const routineIndex = RoutineGen.indexOf(e.target.innerText)
-    temp[i].intakeRoutineGen = temp[i].intakeRoutineGen.replaceAt(routineIndex, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0' )
-    // console.log(temp, !Boolean(+temp[i].intakeRoutineGen[routineIndex]) ? '1' :'0')
+    temp[i].intakeRoutine = temp[i].intakeRoutine.replaceAt(routineIndex, !Boolean(+temp[i].intakeRoutine[routineIndex]) ? '1' :'0' )
+    // console.log(temp, !Boolean(+temp[i].intakeRoutine[routineIndex]) ? '1' :'0')
     setprescriptionDetails(temp)
 
   }
