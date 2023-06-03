@@ -53,3 +53,17 @@
   .visit-list-container tbody tr {
     cursor: pointer;
   }
+
+.prescription-details-container  td span {
+    padding: 5px 10px ;
+    border: none;
+    border-radius: 5px;
+    margin: 0 4px;
+}
+  .inactive-intakeRoutine {
+    background-color: transparent;
+}
+
+.active-intakeRoutine {
+    background-color: var(--green);
+}

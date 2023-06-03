@@ -42,6 +42,13 @@ export default function Patients() {
       setActiveVisit(data.visits[0])
     })
   }
+const getIntakeRoutinegen = (intakeRoutine) => {
+  const standardRoutine = ["M", "A", "N"];
+  return intakeRoutine.split("").map((i, j) => {
+    return { active : Boolean(+i), value : standardRoutine[j] }
+  })
+}
+
   return (
     // <table></table>
     <div className='patients-page-container' >
@@ -87,7 +94,11 @@ export default function Patients() {
                     <td>{i+1}</td>
                     <td>{prescription?.name}</td>
                     <td>{prescription?.dosage}</td>
-                    <td>{prescription?.intakeRoutine}</td>
+                    <td>{isNaN(prescription?.intakeRoutine) ? (prescription?.intakeRoutine) : (
+                      getIntakeRoutinegen(prescription?.intakeRoutine).map((data) => (
+                        <span className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"] }>{data.value}</span>
+                      ))
+                    )}</td>
                     <td>{prescription?.intakePattern}</td>
                   </tr>
                   ))
