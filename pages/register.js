@@ -195,8 +195,8 @@ Patient details
                 <label htmlFor="name" className="patientName-label">patient name</label>
                 <input type="text" onBlur={onInputChange} name="name" id="name" className="name" autoComplete="off" list='patientList' />
                 <datalist id="patientList">
-                        {patientList?.map((p, i) => <option key={i} value={p.name} ></option>)}
-                      </datalist>
+                  {patientList?.map((p, i) => <option key={i} value={p.name} ></option>)}
+                </datalist>
               </div>
               <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="age" className="age-label">patient age</label>
@@ -208,7 +208,10 @@ Patient details
               </div>
               <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="contactNumber" className="contactNumber-label">contact number</label>
-                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" autoComplete="off" />
+                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" list='contactList' autoComplete="off" />
+                <datalist id="contactList">
+                  {patientList?.map((p, i) => <option key={i} value={p.contactNumber} ></option>)}
+                </datalist>
               </div>
               <div className={[styles["patient-appointment-date-and-submit-container"]]}>
                 <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
