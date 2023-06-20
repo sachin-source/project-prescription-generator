@@ -206,6 +206,10 @@ Patient details
                 <label htmlFor="disease" className="disease-label">disease</label>
                 <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" autoComplete="off" />
               </div>
+              <div className={[styles["patientemail-container"], styles["patient-detail-container"]].join(" ")}>
+                <label htmlFor="email" className="email-label">email</label>
+                <input type="email" onBlur={onInputChange} name="email" id="email" className="email" autoComplete="off" />
+              </div>
               <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="contactNumber" className="contactNumber-label">contact number</label>
                 <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" list='contactList' autoComplete="off" />
