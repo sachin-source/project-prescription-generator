@@ -47,7 +47,7 @@ export default function Home() {
   let prescriptionListTemp = [];
   const onInputChange = (event) => {
 
-    const updatedValue = { [event.currentTarget.name]: event.currentTarget.value }
+    const updatedValue = { [event.currentTarget.name || event.currentTarget.id]: event.currentTarget.value }
     setpatientDetails(patientInfo => ({
       ...patientInfo,
       ...updatedValue
@@ -197,11 +197,11 @@ export default function Home() {
             </div>) : ( isLastPage ? (<div className={styles['last-page']} >
               <div className={styles['follow-up-container']} >
                 <label className='' >Follow up</label>
-                <textarea rows={6} />
+                <textarea rows={6} onBlur={onInputChange} name="followup" id="followup" />
               </div>
               <div className={styles['advises-container']} >
                 <label className='' >Advises</label>
-                <textarea rows={6} />
+                <textarea rows={6} onBlur={onInputChange} name="advises" id="advises" />
               </div>
             </div>) : (<div className="patient-details">
               <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
@@ -224,8 +224,8 @@ export default function Home() {
                 </div>
               </div>
               <div className={[styles["patientDisease-container"], styles["patient-detail-container"]].join(" ")}>
-                <label htmlFor="disease" className="disease-label">Diagnosis</label>
-                <input type="text" onBlur={onInputChange} name="disease" id="disease" className="disease" autoComplete="off" />
+                <label htmlFor="diagnosis" className="disease-label">Diagnosis</label>
+                <input type="text" onBlur={onInputChange} name="diagnosis" id="diagnosis" className="disease" autoComplete="off" />
               </div>
               <div className={[styles["patientemail-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="email" className="email-label">Email</label>
@@ -240,8 +240,8 @@ export default function Home() {
               </div>
               <div className={[styles["patient-appointment-date-and-submit-container"]]}>
                 <div className={[styles["patientAppointmentDetails-container"]].join(" ")}>
-                  <label htmlFor="appointmentDetails" className="appointmentDetails-label">Patient complaint</label>
-                  <textarea rows={4} onBlur={onInputChange} type="text" name="appointmentDetails" id="appointmentDetails" className="appointmentDetails" />
+                  <label htmlFor="patientComplaint" className="appointmentDetails-label">Patient complaint</label>
+                  <textarea rows={4} onBlur={onInputChange} type="text" name="patientComplaint" id="patientComplaint" className="appointmentDetails" />
                 </div>
                 <div className={styles['three-row']} >
                 <div className={[styles["patientAppointmentDate-container"], styles["patient-detail-container"]].join(" ")}>
