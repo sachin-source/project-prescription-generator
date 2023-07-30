@@ -47,7 +47,8 @@ export default function Home() {
   let prescriptionListTemp = [];
   const onInputChange = (event) => {
 
-    const updatedValue = { [event.currentTarget.name || event.currentTarget.id]: event.currentTarget.value }
+    const updatedValue = { [event.currentTarget.name || event.currentTarget.id]: event.currentTarget.value };
+    console.log({ updatedValue, patientDetails })
     setpatientDetails(patientInfo => ({
       ...patientInfo,
       ...updatedValue
@@ -201,7 +202,7 @@ export default function Home() {
               </div>
               <div className={styles['advises-container']} >
                 <label className='' >Advises</label>
-                <textarea rows={6} onBlur={onInputChange} name="advises" id="advises" />
+                <textarea rows={6} onBlur={onInputChange} name="advise" id="advise" />
               </div>
             </div>) : (<div className="patient-details">
               <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
@@ -215,11 +216,11 @@ export default function Home() {
                 <label htmlFor="age" className="age-label">Patient age and Gender</label>
                 <div className={styles["two-col"]} >
                   <input type="number" onBlur={onInputChange} name="age" id="age" className="age" autoComplete="off" />
-                  <select className={styles["gender-dropdown"]} >
+                  <select className={styles["gender-dropdown"]} name='gender' onChange={onInputChange} >
                     <option disabled selected>Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Others</option>
+                    <option value={'male'} >Male</option>
+                    <option value={'female'} >Female</option>
+                    <option value={'others'} >Others</option>
                   </select>
                 </div>
               </div>
@@ -251,7 +252,7 @@ export default function Home() {
                 <div className={[styles["patientBP-Temparature-container"], styles["patient-detail-container"]].join(" ")}>
                   <label className="BP-Temparature-label">BP and Temparature</label>
                   <div className={styles['bp-temparature']} >
-                  <input type="text" onBlur={onInputChange} name="bp" id="bp" className="bp" placeholder='BP' />
+                  <input type="text" onBlur={onInputChange} name="bloodPressure" id="bloodPressure" className="bp" placeholder='BP' />
                   <input type="text" onBlur={onInputChange} name="temparature" id="temparature" className="temparature" placeholder='temparature' />
                   </div>
                 </div>

@@ -60,13 +60,15 @@ const getIntakeRoutinegen = (intakeRoutine) => {
           <table className={styles['custom-table']}>
             <thead>
               <tr>
-                <th>Visit</th>
+                <th>Diagnosis</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
           {
             visitsAndPrescriptions.visits.map((visit, i) => (
               <tr className={visit._id == activeVisit._id ? styles.active : ''} onClick={() => setActiveVisit(visit)}>
+                <td> {visit?.diagnosis} </td>
                 <td>
                   { visit._id != activeVisit._id ? ( <span> {visit.appointmentDate} </span> ) : ( <strong> {visit.appointmentDate} </strong> )}
                 </td>
@@ -82,6 +84,8 @@ const getIntakeRoutinegen = (intakeRoutine) => {
               <tr>
                 <th>Sl</th>
                 <th>Prescription Name</th>
+                <th>Type</th>
+                <th>Intake Route</th>
                 <th>Dosage</th>
                 <th>Intake Routine</th>
                 <th>Intake Pattern</th>
@@ -93,6 +97,8 @@ const getIntakeRoutinegen = (intakeRoutine) => {
                     <tr key={i}>
                     <td>{i+1}</td>
                     <td>{prescription?.name}</td>
+                    <td>{prescription?.type}</td>
+                    <td>{prescription?.intakeRoute}</td>
                     <td>{prescription?.dosage}</td>
                     <td>{isNaN(prescription?.intakeRoutine) ? (prescription?.intakeRoutine) : (
                       getIntakeRoutinegen(prescription?.intakeRoutine).map((data) => (
@@ -112,7 +118,7 @@ const getIntakeRoutinegen = (intakeRoutine) => {
       <tr>
         <th>Name</th>
         <th>Age</th>
-        <th>Disease</th>
+        <th>Gender</th>
         <th>Contact</th>
         <th>visits</th>
       </tr>
@@ -122,7 +128,7 @@ const getIntakeRoutinegen = (intakeRoutine) => {
         <tr key={i}>
         <td>{d?.name}</td>
         <td>{d?.age}</td>
-        <td>{d?.disease}</td>
+        <td>{d?.gender}</td>
         <td>{d?.contactNumber}</td>
         <td className='clickable' onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
       </tr>
