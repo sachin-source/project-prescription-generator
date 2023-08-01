@@ -33,7 +33,8 @@ export default function Home() {
     setpatientDetails({});
     setisPriscriptionPage(false);
     setisPrescriptionSubmitted(false);
-    setprescriptionDetails([{}])
+    setprescriptionDetails([{}]);
+    setisPrescriptionSubmitted(false);
   }
   const submita = () => { }
 
@@ -56,10 +57,27 @@ export default function Home() {
   }
 
   const [prescriptions, setprescriptions] = useState([]);
+  const [isSubmitSucceeded, setisSubmitSucceeded] = useState(false);
+
+  const downloadActivePrescriptionDetails = () => {
+    fetch('http://localhost:3005/generate-pdf', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        token: localStorage.getItem('token')
+      },
+      body: JSON.stringify({ ...patientDetails, prescriptionDetails: prescriptionDetails }),
+    }).then((d) => {
+      // setisPrescriptionSubmitted(true);
+      // setisSubmitSucceeded(true);
+      console.log(d)
+    }).catch((e) => {
+      // setisSubmitSucceeded(false);
+    })
+  }
 
   const submit = () => {
-    setisPrescriptionSubmitted(true)
-
+    
     fetch('http://localhost:3005/prescription', {
       method: 'POST',
       headers: {
@@ -68,7 +86,12 @@ export default function Home() {
       },
       body: JSON.stringify({ ...patientDetails, prescriptionDetails: prescriptionDetails }),
     }).then((d) => {
-      console.log(d)
+      setisPrescriptionSubmitted(true);
+      setisSubmitSucceeded(true);
+      // console.log(d)
+      // downloadActivePrescriptionDetails()
+    }).catch((e) => {
+      setisSubmitSucceeded(false);
     })
   }
 
@@ -125,6 +148,7 @@ export default function Home() {
         { isPrescriptionSubmitted ? (<div className='inprogress'>
           <h1>Your prescription is submitted!</h1>
           <span onClick={reset}>click to enter new prescription</span>
+          <span onClick={downloadActivePrescriptionDetails}>Download PDF</span>
         </div>) : (
           <div className={styles["patient-details-section"]}>
             <div className={styles['heading-container']}>
