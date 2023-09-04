@@ -67,7 +67,7 @@ const getIntakeRoutinegen = (intakeRoutine) => {
             <tbody>
           {
             visitsAndPrescriptions.visits.map((visit, i) => (
-              <tr className={visit._id == activeVisit._id ? styles.active : ''} onClick={() => setActiveVisit(visit)}>
+              <tr key={i} className={visit._id == activeVisit._id ? styles.active : ''} onClick={() => setActiveVisit(visit)}>
                 <td> {visit?.diagnosis} </td>
                 <td>
                   { visit._id != activeVisit._id ? ( <span> {visit.appointmentDate} </span> ) : ( <strong> {visit.appointmentDate} </strong> )}
@@ -101,8 +101,8 @@ const getIntakeRoutinegen = (intakeRoutine) => {
                     <td>{prescription?.intakeRoute}</td>
                     <td>{prescription?.dosage}</td>
                     <td>{isNaN(prescription?.intakeRoutine) ? (prescription?.intakeRoutine) : (
-                      getIntakeRoutinegen(prescription?.intakeRoutine).map((data) => (
-                        <span className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"] }>{data.value}</span>
+                      getIntakeRoutinegen(prescription?.intakeRoutine).map((data, j) => (
+                        <span key={j} className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"] }>{data.value}</span>
                       ))
                     )}</td>
                     <td>{prescription?.intakePattern}</td>

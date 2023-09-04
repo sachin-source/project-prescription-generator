@@ -162,7 +162,7 @@ export default function Home() {
             isPriscriptionPage ? (<div className="patient-details">
               {
                 prescriptionDetails.map((a, i) => (
-                  <div className={[styles["prescription-container"]]} >
+                  <div key={i} className={[styles["prescription-container"]]} >
                     <div className={[styles["prescription-detail-container"]]} >
                       <label htmlFor="type" className="type-label" hidden={i} >Type</label>
                       <select className={styles["gender-dropdown"]} id='type' name='type' onChange={(e) => onPrescriptionUpdate(e, i)} >
@@ -201,7 +201,7 @@ export default function Home() {
                       <div className={[styles["intakeRoutineContainer"]]}>
                         {
                           getIntakeRoutinegen(i).map((data, j) => (
-                            <span className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"]} onClick={(e) => intakeRoutineChange(e, i)}>{data.value}</span>
+                            <span key={j} className={data?.active ? styles["active-intakeRoutine"] : styles["inactive-intakeRoutine"]} onClick={(e) => intakeRoutineChange(e, i)}>{data.value}</span>
                           ))
                         }
                       </div>
