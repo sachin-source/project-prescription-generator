@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
+import { apiEndPoint } from './http.service';
 
 // import { fetchWrapper } from 'helpers';
 
@@ -31,7 +32,7 @@ function login(username, password) {
     //     });
     
     return new Promise((resolve, reject) => {
-        return fetch('http://localhost:3005/user/login', {
+        return fetch(`${apiEndPoint}user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

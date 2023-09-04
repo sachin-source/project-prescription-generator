@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import styles from "../styles/Register.module.css"
+import { apiEndPoint } from '../services/http.service';
 
 export default function Home() {
 
@@ -18,7 +19,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3005/patient/names', {
+    fetch(`${apiEndPoint}patient/names`, {
       headers: {
         'Content-Type': 'application/json',
         token: localStorage.getItem('token')
@@ -60,7 +61,7 @@ export default function Home() {
   const [isSubmitSucceeded, setisSubmitSucceeded] = useState(false);
 
   const downloadActivePrescriptionDetails = () => {
-    fetch('http://localhost:3005/generate-pdf', {
+    fetch(`${apiEndPoint}generate-pdf`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ export default function Home() {
 
   const submit = () => {
     
-    fetch('http://localhost:3005/prescription', {
+    fetch(`${apiEndPoint}prescription`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

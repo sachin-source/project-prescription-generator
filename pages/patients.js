@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from "../styles/patient.module.css"
+import { apiEndPoint } from '../services/http.service';
 
 export default function Patients() {
   const [isVisitsPage, setIsVisitsPage] = useState(false);
@@ -10,7 +11,7 @@ export default function Patients() {
   const [visitsAndPrescriptions, setVisitsAndPrescriptions] = useState({});
   const [activeVisit, setActiveVisit] = useState(undefined);
   useEffect(()=>{
-    fetch('http://localhost:3005/patient').then((a) => a.json()).then((data) => {
+    fetch(`${apiEndPoint}patient`).then((a) => a.json()).then((data) => {
       data.status && setactivePatientsData(data.patients);
       data.status && setallPatientsData(data.patients);
       
@@ -26,7 +27,7 @@ export default function Patients() {
 
   const setActivePatientDetails = (patientId="") => {
     setActivePatient(activePatientsData.find((patientData) => patientData._id == patientId));
-    patientId && fetch('http://localhost:3005/visit?patientId=' + patientId).then((a) => a.json()).then((data) => {
+    patientId && fetch(`${apiEndPoint}visit?patientId=` + patientId).then((a) => a.json()).then((data) => {
       setVisitsAndPrescriptions(data)
       setIsVisitsPage(true)
       setActiveVisit(data.visits[0])

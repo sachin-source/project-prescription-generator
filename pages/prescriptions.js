@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { apiEndPoint } from '../services/http.service';
 
 export default function Prescriptions() {
   const [file, setFile] = useState(undefined);
@@ -6,7 +7,7 @@ export default function Prescriptions() {
   const upload  = () => {
     const data = new FormData();
     data.append("file", file);
-    fetch("http://localhost:3005/prescription/upload", { method: "POST", body: data, headers : { token : localStorage.getItem("token") } })
+    fetch(`${apiEndPoint}prescription/upload`, { method: "POST", body: data, headers : { token : localStorage.getItem("token") } })
     .then((response) => {
       console.log(response)
     })
