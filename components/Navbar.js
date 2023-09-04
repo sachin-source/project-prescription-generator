@@ -19,9 +19,11 @@ function Navbar({ authorized }) {
     <div className={styles["navbar-container"]}>
         <div className={styles["logo-container"]}>
             <Link href="/">
-            <h2 >{APP_TITLE.split("").map((element, i) => (
+            {/* <h2 >{APP_TITLE.split("").map((element, i) => (
                 <span key={i}>{element}</span>
-            ))}</h2></Link>
+            ))}</h2> */}
+            <img src='./ayushman.jpg' />
+            </Link>
             {/* <span className="navbar-logo-description">Tech-scription</span> */}
         </div>
         {

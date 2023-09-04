@@ -73,7 +73,7 @@
 }
 
 .patient-details-section label {
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: var(--black);
 }
 
@@ -177,8 +177,8 @@
     border-radius: 10px;
 }
 
-.dosage {
-    max-width: 100px;
+.dosage, .duration {
+    max-width: 80px;
 }
 
 .type {

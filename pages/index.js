@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles["homepage-banner"]} >
     {/* <img src='./homepage.png' /> */}
-    jfgfghghg
+    {/* jfgfghghg */}
     </div>
   )
 }

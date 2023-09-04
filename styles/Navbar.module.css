@@ -11,6 +11,7 @@
 .logo-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .logo-container h2 {
@@ -19,6 +20,10 @@
     font-size: 44px;
     margin: 0;
     cursor: pointer;
+}
+
+.logo-container img {
+    height: 100%;
 }
 
 .navbar-elements-container {

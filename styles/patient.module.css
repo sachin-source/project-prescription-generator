@@ -67,3 +67,17 @@
 .active-intakeRoutine {
     background-color: var(--green);
 }
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.space-between input {
+  height: min-content;
+  padding: 5px;
+  width: 25%;
+  outline: none;
+  font-size: 15px;
+}

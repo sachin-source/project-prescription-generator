@@ -2,28 +2,18 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from "../styles/patient.module.css"
 
-const dummyData = [
-  { name : "Alfreds Futterkiste", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Berglunds snabbköp", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Centro comercial Moctezuma", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Ernst Handel", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Island Trading", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Königlich Essen", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Laughing Bacchus Winecellars", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Magazzini Alimentari Riuniti", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "North/South", age : "23", disease : "Typhoid", contact : "1231231231" },
-  { name : "Paris spécialités", age : "23", disease : "Typhoid", contact : "1231231231" },
-];
-
 export default function Patients() {
   const [isVisitsPage, setIsVisitsPage] = useState(false);
-  const [patientsData, setpatientsData] = useState([{}]);
+  const [activePatientsData, setactivePatientsData] = useState([{}]);
+  const [allPatientsData, setallPatientsData] = useState([{}]);
   const [activePatient, setActivePatient] = useState(undefined);
   const [visitsAndPrescriptions, setVisitsAndPrescriptions] = useState({});
   const [activeVisit, setActiveVisit] = useState(undefined);
   useEffect(()=>{
     fetch('http://localhost:3005/patient').then((a) => a.json()).then((data) => {
-      data.status && setpatientsData(data.patients)
+      data.status && setactivePatientsData(data.patients);
+      data.status && setallPatientsData(data.patients);
+      
     })
   }, []);
 
@@ -35,12 +25,19 @@ export default function Patients() {
   }
 
   const setActivePatientDetails = (patientId="") => {
-    setActivePatient(patientsData.find((patientData) => patientData._id == patientId));
+    setActivePatient(activePatientsData.find((patientData) => patientData._id == patientId));
     patientId && fetch('http://localhost:3005/visit?patientId=' + patientId).then((a) => a.json()).then((data) => {
       setVisitsAndPrescriptions(data)
       setIsVisitsPage(true)
       setActiveVisit(data.visits[0])
     })
+  }
+  const filterPatient = (e) => {
+    const searchText = e.target.value
+    const match = new RegExp(searchText, 'i')
+    // console.log(visitsAndPrescriptions)
+    const filteredData = allPatientsData.filter(a => match.test(a.name) || match.test(a.contactNumber))
+    setactivePatientsData(filteredData)
   }
 const getIntakeRoutinegen = (intakeRoutine) => {
   const standardRoutine = ["M", "A", "N"];
@@ -53,7 +50,10 @@ const getIntakeRoutinegen = (intakeRoutine) => {
     // <table></table>
     <div className='patients-page-container' >
       <div className='breadcrumbs' > <Link href={'/'}> home </Link> {isVisitsPage ? (<span onClick={backToPatientList}> / patients </span>) : (<></>)} </div>
+      <div className={styles['space-between']} >
       <h3> { isVisitsPage ? ( activePatient.name + "'s Visit List") : 'Patient List' } </h3>
+      <input type='search' placeholder='Search by patient name or contact number' onBlur={filterPatient} />
+      </div>
     { isVisitsPage ? (<>
       <div className={styles['visit-page-container']}>
         <div className={styles['visit-list-container']}>
@@ -124,7 +124,7 @@ const getIntakeRoutinegen = (intakeRoutine) => {
       </tr>
       </thead>
       <tbody>
-      {patientsData.map((d, i) => (
+      {activePatientsData.length ? (activePatientsData.map((d, i) => (
         <tr key={i}>
         <td>{d?.name}</td>
         <td>{d?.age}</td>
@@ -132,7 +132,7 @@ const getIntakeRoutinegen = (intakeRoutine) => {
         <td>{d?.contactNumber}</td>
         <td className='clickable' onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
       </tr>
-      ))}
+      ))) : (<span>No patient found!!!</span>)}
       </tbody>
       {/* <tr>
         <td>Alfreds Futterkiste</td>
