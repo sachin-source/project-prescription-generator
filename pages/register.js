@@ -11,6 +11,7 @@ export default function Home() {
   const [isPrescriptionSubmitted, setisPrescriptionSubmitted] = useState(false);
   const [prescriptionDetails, setprescriptionDetails] = useState([{}]);
   const [patientList, setpatientList] = useState([]);
+  const [existingPrescription, setexistingPrescription] = useState([]);
 
   const deletePrescription = (i) => {
     const temp = [...prescriptionDetails];
@@ -28,7 +29,15 @@ export default function Home() {
       .then((d) => {
         setpatientList([...new Set(d?.names)])
       })
-  }, [])
+      const existingPrescriptionDataStrings = localStorage.getItem('copiedPatientInfo');
+      const existingPrescriptionData = JSON.parse(existingPrescriptionDataStrings || '{}');
+      if (existingPrescriptionDataStrings) {
+        setexistingPrescription({ status : true, data : existingPrescriptionData });
+        // localStorage.clear()
+      } else {
+        setexistingPrescription({ status : false, data : {} })
+      }
+    }, [])
 
   const reset = () => {
     setpatientDetails({});
@@ -36,6 +45,8 @@ export default function Home() {
     setisPrescriptionSubmitted(false);
     setprescriptionDetails([{}]);
     setisPrescriptionSubmitted(false);
+    setexistingPrescription({ status : false, data : {}});
+    localStorage.removeItem('copiedPatientInfo')
   }
   const submita = () => { }
 
@@ -157,7 +168,12 @@ export default function Home() {
               <span onClick={() => { setisPriscriptionPage(false) }} className={styles['page-change']} hidden={!(isPriscriptionPage || isLastPage)} > Patient details </span>
               <span hidden={!isLastPage} >/</span>
               <span className={styles['page-change']} hidden={!isLastPage} onClick={gotoPrescriptionPage} > Prescription details </span>
-              <h2><span >{isLastPage ? 'Follow-up and Advises' : (!isPriscriptionPage ? 'Patient details' : 'Treatement')}</span></h2>
+              <div style={{display : 'flex', justifyContent : 'space-between'}} >
+              <h2>
+                <span >{isLastPage ? 'Follow-up and Advises' : (!isPriscriptionPage ? 'Patient details' : 'Treatement')}</span>
+              </h2>
+                {!isPriscriptionPage ? <span style={{ cursor : 'pointer', margin : '10px', fontSize: '1.6rem', border : '1px solid black', borderRadius : '10px', padding : '10px', textAlign : 'center'}} onClick={reset} >Clear</span> : <></>}
+              </div>
             </div>
             {
             isPriscriptionPage ? (<div className="patient-details">
@@ -236,14 +252,14 @@ export default function Home() {
             </div>) : (<div className="patient-details">
               <div className={[styles["patientName-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="name" className="patientName-label">Patient name</label>
-                <input type="text" onBlur={onInputChange} name="name" id="name" className="name" autoComplete="off" list='patientList' />
+                <input type="text" value={existingPrescription.status ? existingPrescription?.data?.name : ''} onBlur={onInputChange} name="name" id="name" className="name" autoComplete="off" list='patientList' />
                 <datalist id="patientList">
                   {patientList?.map((p, i) => <option key={i} value={p.name} ></option>)}
                 </datalist>
               </div>
               <div className={[styles["patient-number-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="contactNumber" className="contactNumber-label">Contact number</label>
-                <input type="number" onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" list='contactList' autoComplete="off" />
+                <input type="number" value={existingPrescription.status ? existingPrescription?.data?.contactNumber : ''} onBlur={onInputChange} name="contactNumber" id="contactNumber" className="contactNumber" list='contactList' autoComplete="off" />
                 <datalist id="contactList">
                   {[...new Set(patientList.map(p => p.contactNumber))]?.map((contactNumber, i) => <option key={i} value={contactNumber} ></option>)}
                 </datalist>
@@ -251,8 +267,8 @@ export default function Home() {
               <div className={[styles["patientAge-container"], styles["patient-detail-container"]].join(" ")}>
                 <label htmlFor="age" className="age-label">Patient age and Gender</label>
                 <div className={styles["two-col"]} >
-                  <input type="number" onBlur={onInputChange} name="age" id="age" className="age" autoComplete="off" />
-                  <select className={styles["gender-dropdown"]} name='gender' onChange={onInputChange} >
+                  <input type="number" value={existingPrescription.status ? existingPrescription?.data?.age : ''} onBlur={onInputChange} name="age" id="age" className="age" autoComplete="off" />
+                  <select className={styles["gender-dropdown"]} name='gender' value={existingPrescription.status ? existingPrescription?.data?.gender : ''} onChange={onInputChange} >
                     <option disabled selected>Gender</option>
                     <option value={'male'} >Male</option>
                     <option value={'female'} >Female</option>

@@ -18,6 +18,10 @@ export default function Patients() {
     })
   }, []);
 
+  const copyPatientInfo = (d) => {
+    localStorage.setItem('copiedPatientInfo', JSON.stringify(d))
+  }
+
   const backToPatientList = () => {
     setActiveVisit(undefined)
     setActivePatient(undefined)
@@ -122,16 +126,18 @@ const getIntakeRoutinegen = (intakeRoutine) => {
         <th>Gender</th>
         <th>Contact</th>
         <th>visits</th>
+        <th>Copy</th>
       </tr>
       </thead>
       <tbody>
-      {activePatientsData.length ? (activePatientsData.map((d, i) => (
+      {activePatientsData.length ? (activePatientsData.filter(d => d.name).map((d, i) => (
         <tr key={i}>
         <td>{d?.name}</td>
         <td>{d?.age}</td>
         <td>{d?.gender}</td>
         <td>{d?.contactNumber}</td>
         <td className='clickable' onClick={() => setActivePatientDetails(d?._id)}>&#8595;</td>
+        <td onClick={() => copyPatientInfo(d)} >copy</td>
       </tr>
       ))) : (<span>No patient found!!!</span>)}
       </tbody>
